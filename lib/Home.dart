@@ -68,8 +68,29 @@ class _HomeState extends State<Home> {
           IconButton(
               icon: Icon(Icons.delete),
               onPressed: (){
-                removedAll();
-              })
+                showDialog<String>(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                        title: Center(
+                          child: Text('全データ削除しますか？'),
+                        ),
+                        actions:<Widget>[
+                          FlatButton(
+                              onPressed:() => Navigator.pop(context,'Cancel'),
+                              child: Text('Cancel')
+                          ),
+                          FlatButton(
+                            onPressed: (){
+                              Navigator.pop(context,'OK');
+                              removedAll();
+                            },
+                            child: Text('OK'),
+                          ),
+                        ]
+                    )
+                );
+              }
+              )
           ]
       ),
 

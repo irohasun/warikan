@@ -106,7 +106,11 @@ class _addMemberButtonState extends State<addMemberButton> {
                           print(widget.CalcPayList);
                           widget.callbackFriend(_friendController.text);
                         },
-                        child: Text('OK'),
+                        child: Text('追加',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                        ),
+                        ),
                       ),
                     ]
                 ),

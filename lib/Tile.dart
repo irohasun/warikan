@@ -24,26 +24,38 @@ Widget build(BuildContextcontext){
     child:Container(
       color:Colors.white,
       child:ListTile(
-        leading:Text(widget.NameList[widget.index]),
-        title:Text(widget.EventList[widget.index]),
-        subtitle:Text((widget.PaymentList[widget.index])),
-        onTap:(){
-          print(widget.NameList);
-          print(widget.EventList);
-        },
-      ),
-    ),
-
-    secondaryActions:<Widget>[
-      IconSlideAction(
-          color:Colors.indigo,
-          iconWidget:Text(
-            "削除",
-            style:TextStyle(color:Colors.white),
+          leading:Container(
+            width: 150.0,
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical:10.0),
+              child: Text(widget.NameList[widget.index],
+                style: TextStyle(
+                  fontSize: 20.0,
+                ),),
+            ),
           ),
-          onTap:()=>{}//_showSnackbar('Delete'),
-
-      ),
+          title:Padding(
+              padding: EdgeInsets.symmetric(vertical: 5.0),
+              child:Text(
+                widget.EventList[widget.index],
+                style: TextStyle(
+                  fontSize: 20.0,),
+              )),
+          subtitle:Text((widget.PaymentList[widget.index]),
+            style: TextStyle(
+              fontSize: 20.0,),
+          )),),
+      secondaryActions:<Widget>[
+          IconSlideAction(
+            color:Colors.red,
+            iconWidget:Text(
+              "削除",
+              style:TextStyle(color:Colors.white),
+            ),
+            onTap:()=>{
+            }
+          //_showSnackbar('Delete'),
+        ),
     ],
 
   );

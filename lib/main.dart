@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:warikan_app/Home.dart';
-import 'package:warikan_app/root.dart';
 
 void main() {
   runApp(MyApp());

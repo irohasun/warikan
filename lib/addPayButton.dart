@@ -19,11 +19,10 @@ class addPayButton extends StatefulWidget {
 }
 
 class _addPayButtonState extends State<addPayButton> {
-  final _formKey = GlobalKey<FormState>();
   TextEditingController _eventController = TextEditingController();
   TextEditingController _paymentController = TextEditingController();
-
-  set selected(selected) {}
+  final _formKey = GlobalKey<FormState>();
+  String name;
 
   List<String> FriendList = [];
 
@@ -32,6 +31,7 @@ class _addPayButtonState extends State<addPayButton> {
       FriendList.add(friend);
     });
   }
+  String selected;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,6 @@ class _addPayButtonState extends State<addPayButton> {
         heroTag: "hero2",
         child: Icon(Icons.add),
         onPressed: (){
-          var selected;
           showDialog<String>(
             context: context,
             builder: (BuildContext context) => AlertDialog(
@@ -52,54 +51,87 @@ class _addPayButtonState extends State<addPayButton> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      DropdownButtonFormField<String>(
-                        validator: (value) => value == null ? 'field required' : null,
-                        value: selected,
-                        decoration: InputDecoration(
-                          border: UnderlineInputBorder(),
-                          filled: true,
-                          icon: Icon(Icons.person),
-                          labelText:"要選択",
+                      Form(
+                        key: _formKey,
+                        child: Column(
+                          children: <Widget>[
+                            DropdownButtonFormField<String>(
+                              validator: (value) => value == null ? 'field required' : null,
+                              value: selected,
+                              decoration: InputDecoration(
+                                border: UnderlineInputBorder(),
+                                filled: true,
+                                icon: Icon(Icons.person),
+                                labelText: '要選択',
+                              ),
+                              items: widget.FriendList
+                                  .map((label) => DropdownMenuItem(
+                                child: Text(label),
+                                value: label,
+                              ))
+                                  .toList(),
+                              onChanged: (value) {
+                                setState(() => selected = value);
+                              },
+                            ),
+
+                            TextFormField(
+                              textCapitalization: TextCapitalization.words,
+                              decoration: InputDecoration(
+                                border: UnderlineInputBorder(),
+                                filled: true,
+                                icon: Icon(Icons.event),
+                                labelText:"イベント",
+                              ),
+                              controller: _eventController,
+                            ),
+
+                            TextFormField(
+                              textCapitalization: TextCapitalization.words,
+                              decoration: InputDecoration(
+                                border: UnderlineInputBorder(),
+                                filled: true,
+                                icon: Icon(Icons.money),
+                                labelText:"金額",
+                              ),
+                              keyboardType: TextInputType.phone,
+                              controller: _paymentController,
+                            ),
+
+//                            Row(
+////                              children: [
+////                                FlatButton(
+////                                onPressed:() => Navigator.pop(context,'Cancel'),
+////                                child: Text('Cancel')
+////                                ),
+////
+////                                FlatButton(
+////                                  child: Text('追加'),
+////                                  color: Colors.green,
+////                                  onPressed: () {
+////                                    Navigator.pop(context,'OK');
+////                                    widget.CalcNameList.add(selected);
+////                                    widget.CalcPayList.add(_paymentController.text);
+////                                    widget.callback(
+////                                        selected,
+////                                        _eventController.text,
+////                                        _paymentController.text);
+//////                                    if (_formKey.currentState.validate()) {
+//////                                      _formKey.currentState.save();
+//////                                    }
+////                                  },
+////                                ),
+////                              ],
+////                            )
+                          ],
                         ),
-                        items: widget.FriendList
-                            .map((label) => DropdownMenuItem(
-                          child: Text(label),
-                          value: label,
-                        ))
-                            .toList(),
-                        onChanged: (value) {
-                          setState(() => selected = value);
-                        },
                       ),
-
-                      TextFormField(
-                        textCapitalization: TextCapitalization.words,
-                        decoration: InputDecoration(
-                          border: UnderlineInputBorder(),
-                          filled: true,
-                          icon: Icon(Icons.event),
-                          labelText:"イベント",
-                        ),
-                        controller: _eventController,
-                      ),
-
-                      TextFormField(
-                        textCapitalization: TextCapitalization.words,
-                        decoration: InputDecoration(
-                          border: UnderlineInputBorder(),
-                          filled: true,
-                          icon: Icon(Icons.money),
-                          labelText:"金額",
-                        ),
-                        keyboardType: TextInputType.phone,
-                        controller: _paymentController,
-                      ),
-
-
                     ],
                   ),
                 ),
 
+                  //AlertDialog用のFlatButtonのコード
+                  //Form内にネストしないとvalidationできないため削除
                 actions:<Widget>[
                   FlatButton(
                       onPressed:() => Navigator.pop(context,'Cancel'),
@@ -110,17 +142,23 @@ class _addPayButtonState extends State<addPayButton> {
                       Navigator.pop(context,'OK');
                       widget.CalcNameList.add(selected);
                       widget.CalcPayList.add(_paymentController.text);
+                      print(selected);
                       widget.callback(
                           selected,
                           _eventController.text,
                           _paymentController.text);
-                      if (_formKey.currentState.validate()) {
-                        // バリデーションが通ればスナックバーを表示
-                        Scaffold.of(context)
-                            .showSnackBar(SnackBar(content: Text('更新しました。')));
-                      }
+            
+//                      if (_formKey.currentState.validate()) {
+//                        // バリデーションが通ればスナックバーを表示
+//                        Scaffold.of(context)
+//                            .showSnackBar(SnackBar(content: Text('更新しました。')));
+//                      }
                     },
-                    child: Text('OK'),
+                    child: Text('追加',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ]
             ),

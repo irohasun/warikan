@@ -35,7 +35,12 @@ class _checkState extends State<check> {
 
   //合計金額を人数で割った平均値を返す関数
   avePay(){
-    return widget.sumPaymentList()/widget.FriendList.length;
+    if(widget.sumPaymentList()/widget.FriendList.length > 0){
+      return widget.sumPaymentList()/widget.FriendList.length;
+    }else{
+      return 0;
+    }
+
   }
 
   //誰が誰に支払うかのTextを返す関数
@@ -116,8 +121,6 @@ class _checkState extends State<check> {
                       trailing: transPay(index),
                       onTap: (){
                         print(avePay().toStringAsFixed(0));
-                        print(widget.NameList);
-                        print(widget.FriendList);
                       },
                     ),
                     Divider(),
