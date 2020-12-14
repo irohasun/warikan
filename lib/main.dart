@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: '割り勘感',
-      debugShowCheckedModeBanner: false,//Debugを表示をOFF
+      debugShowCheckedModeBanner: false, //Debugを表示をOFF
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -18,5 +18,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
