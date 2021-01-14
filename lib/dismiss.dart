@@ -24,16 +24,6 @@ class _dismissState extends State<dismiss> {
     List _calname = widget.CalcNameList;
     List _calpay = widget.CalcPayList;
 
-
-    // for(int i; i >_calname.length; i++ )
-    // if(_name ==_calname[0]){
-    //   if(_pay == _calpay[0]){
-    //     print('success');
-    //   }
-    // }else{
-    //   print('false');
-    // }
-
     for (int i = 0; i < _calname.length; i++) {
       if (_calname[i] == _name) {
         if (_calpay[i] == _pay) {

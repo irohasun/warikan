@@ -1,4 +1,6 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:warikan_app/admob.dart';
 
 class check extends StatefulWidget {
   List<String> NameList = [];
@@ -59,8 +61,8 @@ class _checkState extends State<check> {
               fontSize: 18.0,
             ));
       }
-    }else if((widget.FriendList[maxMem] == widget.FriendList[friendIndex])) {
-    }else{
+    } else if ((widget.FriendList[maxMem] == widget.FriendList[friendIndex])) {
+    } else {
       return Text(
           '${widget.FriendList[maxMem]}　☞　${widget.FriendList[friendIndex]}',
           style: TextStyle(
@@ -79,8 +81,7 @@ class _checkState extends State<check> {
             style: TextStyle(
               fontSize: 18.0,
             ));
-      }else if(avePay() == sumOnePay(widget.NameList[i])){
-      }
+      } else if (avePay() == sumOnePay(widget.NameList[i])) {}
     }
   }
 
@@ -145,6 +146,20 @@ class _checkState extends State<check> {
               ]);
             },
             itemCount: widget.FriendList.length,
+          ),
+        ],
+      ),
+      bottomNavigationBar: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          AdmobBanner(
+            adUnitId: AdMobService().getBannerAdUnitId(),
+            adSize: AdmobBannerSize(
+              width: MediaQuery.of(context).size.width.toInt(),
+              height: AdMobService().getHeight(context).toInt(),
+              name: 'SMART_BANNER',
+            ),
           ),
         ],
       ),

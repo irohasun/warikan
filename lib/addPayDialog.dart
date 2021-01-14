@@ -37,8 +37,8 @@ class _addPayDialogState extends State<addPayDialog> {
 
   buttonState() {
     setState(() {
-      if (selected.isEmpty |
-          _eventController.text.isEmpty |
+      if (selected.isEmpty|
+          _eventController.text.isEmpty|
           _eventController.text.isEmpty) {
         _isEnable = false;
         print(_isEnable);
